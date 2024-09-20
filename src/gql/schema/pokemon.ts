@@ -1,5 +1,6 @@
 import builder from "../builder";
 import { type Database } from "../../db/database.types";
+import { pokemonTypeLoader } from "../../db/loaders";
 
 type Pokemon = Database["public"]["Tables"]["pokemon"]["Row"];
 
@@ -16,5 +17,10 @@ export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
     weight: t.exposeInt("weight"),
     height: t.exposeInt("height"),
     baseExperience: t.exposeInt("base_experience"),
+    type: t.string({
+      resolve: async (parent) => {
+        return await pokemonTypeLoader.load(parent.id);
+      },
+    }),
   }),
 });
