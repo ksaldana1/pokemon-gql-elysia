@@ -1,0 +1,22 @@
+{
+  "name": "pokemon-gql",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "generate": "supabase gen types typescript --project-id sdfrspogbiyhjkclkgpn > src/db/database.types.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "supabase": "^1.192.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@elysiajs/graphql-yoga": "^1.1.1",
+    "@pothos/core": "^4.2.0",
+    "@supabase/supabase-js": "^2.45.4",
+    "elysia": "^1.1.13"
+  }
+}
