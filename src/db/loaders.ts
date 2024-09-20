@@ -3,7 +3,6 @@ import { client } from "./client";
 
 export const pokemonLoader = new DataLoader(async (keys: readonly number[]) => {
   const { data } = await client.from("pokemon").select("*").in("id", keys);
-
   return keys.map((key) => data?.find((row) => row?.id === key));
 });
 

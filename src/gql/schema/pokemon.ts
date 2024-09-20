@@ -16,8 +16,8 @@ export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
   fields: (t) => ({
     id: t.exposeInt("id"),
     identifier: t.string({
-      resolve: (parent) => {
-        const [first, ...rest] = parent.identifier.split("");
+      resolve: ({ identifier }) => {
+        const [first, ...rest] = identifier.split("");
         return [first.toUpperCase(), ...rest].join("");
       },
     }),
@@ -31,8 +31,8 @@ export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
       },
     }),
     type: t.string({
-      resolve: async (parent) => {
-        return await pokemonTypeLoader.load(parent.id);
+      resolve: async ({ id }) => {
+        return await pokemonTypeLoader.load(id);
       },
     }),
     baseExperience: t.exposeInt("base_experience"),
