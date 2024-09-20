@@ -4,13 +4,12 @@ import schema from "./gql/schema";
 
 const PORT = 3000;
 
-export const app = new Elysia()
-  .use(
-    yoga({
-      schema,
-    })
-  )
-  .listen(PORT);
+const app = new Elysia({ serve: { port: PORT } }).use(
+  yoga({
+    schema,
+  })
+);
+
+export default app;
 
 console.log(`Listening on port ${PORT} 🚀`);
-
