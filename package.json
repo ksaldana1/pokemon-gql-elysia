@@ -17,6 +17,7 @@
     "@elysiajs/graphql-yoga": "^1.1.1",
     "@pothos/core": "^4.2.0",
     "@pothos/plugin-relay": "^4.2.1",
+    "@pothos/plugin-simple-objects": "^4.1.0",
     "@supabase/supabase-js": "^2.45.4",
     "dataloader": "^2.2.2",
     "elysia": "^1.1.13"
