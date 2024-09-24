@@ -13,6 +13,11 @@ export const pokemonTypeLoader = new DataLoader(
       .select("id, type")
       .in("id", keys);
 
+    if (!data) {
+      return [];
+    }
+
+    const grouped = Object.groupBy(data, (d) => d.id);
     return keys.map((key) => data?.find((row) => row?.id === key)?.type ?? "");
   }
 );

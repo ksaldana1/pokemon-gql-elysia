@@ -3,9 +3,10 @@ import RelayPlugin from "@pothos/plugin-relay";
 import SimpleObjectsPlugin from "@pothos/plugin-simple-objects";
 
 const builder = new SchemaBuilder<{
-  // Type of the context object
   Context: {};
+  DefaultFieldNullability: false;
 }>({
+  defaultFieldNullability: false,
   plugins: [RelayPlugin, SimpleObjectsPlugin],
   relay: {},
 });

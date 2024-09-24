@@ -14,6 +14,7 @@ builder.queryType({
     }),
     pokemon: t.field({
       type: PokemonRef,
+      nullable: true,
       args: {
         id: t.arg.int({ required: true }),
       },
