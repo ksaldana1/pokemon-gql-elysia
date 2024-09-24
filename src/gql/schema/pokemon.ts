@@ -41,7 +41,7 @@ export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
   description: "Pokemon base type",
   fields: (t) => ({
     id: t.exposeInt("id"),
-    identifier: t.string({
+    name: t.string({
       resolve: ({ identifier }) => {
         return identifier.charAt(0).toUpperCase() + identifier.slice(1);
       },
