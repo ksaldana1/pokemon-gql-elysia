@@ -11,7 +11,7 @@ const Dimensions = builder.simpleObject("Dimensions", {
   }),
 });
 
-const POKEMON_TYPES = [
+export const POKEMON_TYPES = [
   "Normal",
   "Fighting",
   "Flying",
@@ -30,6 +30,7 @@ const POKEMON_TYPES = [
   "Dragon",
   "Dark",
   "Fairy",
+  "Unknown",
 ] as const;
 
 export const PokemonType = builder.enumType("PokemonType", {
@@ -54,7 +55,8 @@ export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
         };
       },
     }),
-    type: t.string({
+    type: t.field({
+      type: [PokemonType],
       resolve: async ({ id }) => {
         return await pokemonTypeLoader.load(id);
       },
