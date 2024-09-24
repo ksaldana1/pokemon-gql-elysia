@@ -62,5 +62,6 @@ export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
       },
     }),
     baseExperience: t.exposeInt("base_experience"),
+    image_url: t.exposeString("image_url"),
   }),
 });
