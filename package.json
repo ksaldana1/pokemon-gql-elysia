@@ -3,12 +3,14 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "dev": "bun run --watch src/index.ts",
+    "dev": "bun run --watch bin/server.ts",
     "generate": "supabase gen types typescript --project-id sdfrspogbiyhjkclkgpn > src/db/database.types.ts"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240924.0",
     "@types/bun": "latest",
-    "supabase": "^1.192.5"
+    "supabase": "^1.192.5",
+    "wrangler": "^3.78.8"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

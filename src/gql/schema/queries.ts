@@ -1,7 +1,6 @@
 import builder from "../builder";
 import { PokemonRef } from "./pokemon";
 import { client } from "../../db/client";
-import { pokemonLoader } from "../../db/loaders";
 
 builder.queryType({
   fields: (t) => ({
@@ -18,7 +17,7 @@ builder.queryType({
       args: {
         id: t.arg.int({ required: true }),
       },
-      resolve: async (_, args) => {
+      resolve: async (_, args, { pokemonLoader }) => {
         return await pokemonLoader.load(args.id);
       },
     }),

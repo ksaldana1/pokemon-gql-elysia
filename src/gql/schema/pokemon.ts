@@ -1,6 +1,5 @@
 import builder from "../builder";
 import { type Database } from "../../db/database.types";
-import { pokemonTypeLoader } from "../../db/loaders";
 
 type Pokemon = Database["public"]["Tables"]["pokemon"]["Row"];
 
@@ -37,6 +36,8 @@ export const PokemonType = builder.enumType("PokemonType", {
   values: POKEMON_TYPES,
 });
 
+export type TPokemonType = (typeof POKEMON_TYPES)[number];
+
 export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
   description: "Pokemon base type",
   fields: (t) => ({
@@ -57,7 +58,7 @@ export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
     }),
     type: t.field({
       type: [PokemonType],
-      resolve: async ({ id }) => {
+      resolve: async ({ id }, _, { pokemonTypeLoader }) => {
         return await pokemonTypeLoader.load(id);
       },
     }),

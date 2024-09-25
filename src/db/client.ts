@@ -5,3 +5,5 @@ export const client = createClient<Database>(
   import.meta.env.API_HOST,
   import.meta.env.API_KEY
 );
+
+export type DB = typeof client;
