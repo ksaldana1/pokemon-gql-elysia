@@ -1,4 +1,4 @@
 import { client } from "../src/db/client";
 import { app } from "../src/index";
 
-app(client);
+app({ db: client });

@@ -6,7 +6,11 @@ import type { DB } from "./db/client";
 
 const port = 3030;
 
-export const app = (db: DB) =>
+export interface AppOptions {
+  db: DB;
+}
+
+export const app = ({ db }: AppOptions) =>
   new Elysia({ serve: { port } })
     .use(
       yoga({

@@ -1,6 +1,6 @@
 declare module "bun" {
   interface Env {
-    API_KEY: string;
-    API_HOST: string;
+    SUPABASE_URL: string;
+    SUPABASE_KEY: string;
   }
 }
