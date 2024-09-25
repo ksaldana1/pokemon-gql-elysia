@@ -4,12 +4,14 @@ import SimpleObjectsPlugin from "@pothos/plugin-simple-objects";
 import type { pokemonLoader, pokemonTypeLoader } from "../db/loaders";
 import type { DB } from "../db/client";
 
+export type Context = {
+  pokemonLoader: ReturnType<typeof pokemonLoader>;
+  pokemonTypeLoader: ReturnType<typeof pokemonTypeLoader>;
+  db: DB;
+};
+
 const builder = new SchemaBuilder<{
-  Context: {
-    pokemonLoader: ReturnType<typeof pokemonLoader>;
-    pokemonTypeLoader: ReturnType<typeof pokemonTypeLoader>;
-    db: DB;
-  };
+  Context: Context;
   DefaultFieldNullability: false;
 }>({
   defaultFieldNullability: false,

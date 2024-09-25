@@ -3,19 +3,18 @@ import { yoga } from "@elysiajs/graphql-yoga";
 import schema from "./gql/schema";
 import { pokemonLoader, pokemonTypeLoader } from "./db/loaders";
 import type { DB } from "./db/client";
-
-const port = 3030;
+import type { Context } from "./gql/builder";
 
 export interface AppOptions {
   db: DB;
 }
 
 export const app = ({ db }: AppOptions) =>
-  new Elysia({ serve: { port }, aot: false })
+  new Elysia({ aot: false })
     .use(
       yoga({
         schema,
-        context: async () => {
+        context: async (): Promise<Context> => {
           return {
             pokemonLoader: pokemonLoader(db),
             pokemonTypeLoader: pokemonTypeLoader(db),
