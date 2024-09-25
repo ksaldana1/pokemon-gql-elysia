@@ -1,13 +1,12 @@
 import builder from "../builder";
 import { PokemonRef } from "./pokemon";
-import { client } from "../../db/client";
 
 builder.queryType({
   fields: (t) => ({
     pokemons: t.field({
       type: [PokemonRef],
-      resolve: async () => {
-        const { data } = await client.from("pokemon").select("*").order("id");
+      resolve: async (_, __, { db }) => {
+        const { data } = await db.from("pokemon").select("*").order("id");
         return data ?? [];
       },
     }),

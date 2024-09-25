@@ -11,7 +11,7 @@ export interface AppOptions {
 }
 
 export const app = ({ db }: AppOptions) =>
-  new Elysia({ serve: { port } })
+  new Elysia({ serve: { port }, aot: false })
     .use(
       yoga({
         schema,
@@ -19,15 +19,13 @@ export const app = ({ db }: AppOptions) =>
           return {
             pokemonLoader: pokemonLoader(db),
             pokemonTypeLoader: pokemonTypeLoader(db),
+            db,
           };
         },
       })
     )
     .get("/health", () => {
       return "OK";
-    })
-    .listen(port);
+    });
 
 export type App = typeof app;
-
-console.log(`Listening on port ${port} 🚀`);
