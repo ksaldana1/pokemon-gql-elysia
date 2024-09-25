@@ -6,7 +6,12 @@ builder.queryType({
     pokemons: t.field({
       type: [PokemonRef],
       resolve: async (_, __, { db }) => {
-        const { data } = await db.from("pokemon").select("*").order("id");
+        const { data } = await db
+          .from("pokemon")
+          .select("*")
+          .order("id")
+          .limit(151);
+
         return data ?? [];
       },
     }),
