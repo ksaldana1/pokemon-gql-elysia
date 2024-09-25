@@ -10,6 +10,18 @@ const Dimensions = builder.simpleObject("Dimensions", {
   }),
 });
 
+const PokemonType = builder.simpleObject("PokemonType", {
+  fields: (t) => ({
+    primary: t.field({
+      type: PokemonTypes,
+    }),
+    secondary: t.field({
+      type: PokemonTypes,
+      nullable: true,
+    }),
+  }),
+});
+
 export const POKEMON_TYPES = [
   "Normal",
   "Fighting",
@@ -32,7 +44,7 @@ export const POKEMON_TYPES = [
   "Unknown",
 ] as const;
 
-export const PokemonType = builder.enumType("PokemonType", {
+export const PokemonTypes = builder.enumType("PokemonTypes", {
   values: POKEMON_TYPES,
 });
 
@@ -57,9 +69,13 @@ export const PokemonRef = builder.objectRef<Pokemon>("Pokemon").implement({
       },
     }),
     type: t.field({
-      type: [PokemonType],
+      type: PokemonType,
       resolve: async ({ id }, _, { pokemonTypeLoader }) => {
-        return await pokemonTypeLoader.load(id);
+        const [primary, secondary] = await pokemonTypeLoader.load(id);
+        return {
+          primary,
+          secondary,
+        };
       },
     }),
     baseExperience: t.exposeInt("base_experience"),
